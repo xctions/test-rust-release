@@ -3,8 +3,8 @@ name: Test Rust Release
 on:
   workflow_dispatch:
   push:
-    branches:
-      - dev
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -17,5 +17,5 @@ jobs:
         uses: xctions/rust-release-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          release-tag: v${{ github.run_number }}
+          release-tag: ${{ github.ref_name }}
           platforms: linux-x86_64
